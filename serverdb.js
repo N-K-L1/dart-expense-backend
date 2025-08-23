@@ -69,11 +69,6 @@ app.get('/expenses/:userId/today', (req, res) => {
     });
 });
 
-// //Get the result based on user's search
-// app.get('/expenses/search', (req, res) => {
-
-//     });
-
 // //Add new expenses for a given user
 // app.post('/expenses/add', (req, res) => {
 
