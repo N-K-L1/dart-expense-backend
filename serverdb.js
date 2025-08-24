@@ -69,10 +69,19 @@ app.get('/expenses/:userId/today', (req, res) => {
     });
 });
 
-// //Add new expenses for a given user
-// app.post('/expenses/add', (req, res) => {
-
-//     });
+app.post('/expenses/add/:userId', (req, res) => {
+    const userId = req.params.userId;
+    const item = req.body.item;
+    const paid = req.body.paid;
+    const sql = "INSERT INTO expense (user_id, item, paid, date) VALUES (?, ?, ?, NOW())";
+    con.query(sql, [userId, item, paid], function (err, results) {
+        if (err) {
+            console.error(err);
+            return res.status(500).send("Database server error");
+        }
+        res.status(201).json({ message: "Inserted!", results });
+    });
+});
 
 app.delete('/expenses/delete/:userId/:expenseId', (req, res) => {
     const { userId, expenseId } = req.params;
