@@ -74,11 +74,6 @@ app.get('/expenses/:userId/today', (req, res) => {
 
 //     });
 
-// //Delete recorded expenses for a given user    
-// app.delete('/expenses/delete', (req, res) => {
-
-//     });
-
 app.delete('/expenses/delete/:userId/:expenseId', (req, res) => {
     const { userId, expenseId } = req.params;
     const sql = "DELETE FROM expense WHERE id = ? AND user_id = ?";
