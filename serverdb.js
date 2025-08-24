@@ -83,10 +83,15 @@ app.post('/expenses/add/:userId', (req, res) => {
     });
 });
 
-// //Delete recorded expenses for a given user    
-// app.delete('/expenses/delete', (req, res) => {
-
-//     });
+app.delete('/expenses/delete/:userId/:expenseId', (req, res) => {
+    const { userId, expenseId } = req.params;
+    const sql = "DELETE FROM expense WHERE id = ? AND user_id = ?";
+    con.query(sql, [expenseId, userId], (err, result) => {
+        if(err) return res.status(500).send("Database server error");
+        if(result.affectedRows === 0) return res.status(404).send("Expense not found");
+        res.json({ message: "Deleted!" });
+    });
+});
 
 
 // ---------- Server starts here ---------
